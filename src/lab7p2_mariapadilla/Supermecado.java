@@ -95,27 +95,32 @@ public class Supermecado extends javax.swing.JFrame {
 
         jM_File.setText("File");
 
-        jMenuItem1.setText("jMenuItem1");
+        jMenuItem1.setText("New File");
         jM_File.add(jMenuItem1);
 
-        jMenuItem2.setText("jMenuItem2");
+        jMenuItem2.setText("Import File");
+        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem2ActionPerformed(evt);
+            }
+        });
         jM_File.add(jMenuItem2);
 
         jMenuBar1.add(jM_File);
 
         jM_Window.setText("Window");
 
-        jMenu1.setText("jMenu1");
+        jMenu1.setText("Clear");
 
-        jMenuItem3.setText("jMenuItem3");
+        jMenuItem3.setText("Clear Command Line");
         jMenu1.add(jMenuItem3);
 
-        jMenuItem5.setText("jMenuItem5");
+        jMenuItem5.setText("Clear Table");
         jMenu1.add(jMenuItem5);
 
         jM_Window.add(jMenu1);
 
-        jMenuItem4.setText("jMenuItem4");
+        jMenuItem4.setText("Refresh Tree");
         jM_Window.add(jMenuItem4);
 
         jMenuBar1.add(jM_Window);
@@ -138,6 +143,10 @@ public class Supermecado extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     /**
      * @param args the command line arguments
