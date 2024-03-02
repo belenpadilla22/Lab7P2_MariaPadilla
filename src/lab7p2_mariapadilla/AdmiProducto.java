@@ -47,12 +47,12 @@ public class AdmiProducto {
             fw = new FileWriter(archivo, false);// false que lo reescriba 
             bw = new BufferedWriter(fw);
             for (Producto t : listaProductos) {
-                bw.write(t.getId()+ ";");
-                bw.write(t.getName()+ ";");
-                bw.write(t.getCategory()+ ";");
-                bw.write(t.getPrice()+ ";");
-                bw.write(t.getAisle()+ ";");
-                bw.write(t.getBin()+ ";");
+                bw.write(t.getId()+ ",");
+                bw.write(t.getName()+ ",");
+                bw.write(t.getCategory()+ ",");
+                bw.write(t.getPrice()+ ",");
+                bw.write(t.getAisle()+ ",");
+                bw.write(t.getBin()+ ",");
             }
             bw.flush();
         } catch (Exception ex) {

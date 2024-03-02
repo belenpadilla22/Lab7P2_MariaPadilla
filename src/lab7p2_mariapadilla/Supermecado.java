@@ -4,11 +4,25 @@
  */
 package lab7p2_mariapadilla;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author belen
  */
 public class Supermecado extends javax.swing.JFrame {
+ Scanner sc = new Scanner(System.in);
 
     /**
      * Creates new form Supermecado
@@ -31,7 +45,7 @@ public class Supermecado extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree();
-        jTextField1 = new javax.swing.JTextField();
+        jT_c = new javax.swing.JTextField();
         jB_Enter = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jM_File = new javax.swing.JMenu();
@@ -63,7 +77,18 @@ public class Supermecado extends javax.swing.JFrame {
         jTree1.setModel(new javax.swing.tree.DefaultTreeModel(treeNode1));
         jScrollPane2.setViewportView(jTree1);
 
+        jT_c.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jT_cActionPerformed(evt);
+            }
+        });
+
         jB_Enter.setText("Enter");
+        jB_Enter.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jB_EnterMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -74,7 +99,7 @@ public class Supermecado extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 536, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jT_c, javax.swing.GroupLayout.PREFERRED_SIZE, 598, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jB_Enter, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -84,7 +109,7 @@ public class Supermecado extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jT_c, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jB_Enter))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -148,6 +173,25 @@ public class Supermecado extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
+    private void jT_cActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jT_cActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_jT_cActionPerformed
+
+    private void jB_EnterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jB_EnterMouseClicked
+        // TODO add your handling code here:
+        if (jT_c.getText().equals("./data.txt")){
+            CargarTabla();
+            
+        }if (jT_c.getText().equals("./create archivo.txt"))
+            try {
+                CreacionArchivos();
+        } catch (IOException ex) {
+            
+        }
+        
+    }//GEN-LAST:event_jB_EnterMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -182,6 +226,92 @@ public class Supermecado extends javax.swing.JFrame {
             }
         });
     }
+    // metodos
+    public void CargarTabla (){
+        File archivo = null;
+        FileReader fr = null;
+        BufferedReader br = null;
+        DefaultTableModel modelo =(DefaultTableModel )jTable1.getModel();
+        
+        try {
+             archivo = new File("./data.txt"); 
+             sc = new Scanner(archivo);
+             while (sc.hasNext()) {
+                String next = sc.nextLine();
+                System.out.println(next);
+                String []tok=next.split(",");
+                Object []m={tok[0],tok[1],tok[2],tok[3],tok[4],tok[5]};
+                modelo.addRow(m);
+            }
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    
+    }
+    public void CreacionArchivos () throws IOException{
+//        DefaultTableModel modelo =(DefaultTableModel )jTable1.getModel();
+//        AdmiProducto admi=new AdmiProducto("./prueba.txt");
+//       
+//        for (int i = 0; i < modelo.getRowCount(); i++) {
+//            System.out.println(modelo.getValueAt(i, 0));
+//            System.out.println(modelo.getValueAt(i, 1));
+//            System.out.println(modelo.getValueAt(i, 2));
+//            System.out.println(modelo.getValueAt(i, 3));
+//            System.out.println(modelo.getValueAt(i, 4));
+//            System.out.println(modelo.getValueAt(i, 5));
+//            
+//            
+//            int id=(int) modelo.getValueAt(i,0 );
+//            String name= modelo.getValueAt(i,1 ).toString();
+//            int cate= (int) modelo.getValueAt(i,2 );
+//            double price=(double) modelo.getValueAt(i,3 );
+//            int aisle=  Integer.parseInt(modelo.getValueAt(i,4 ).toString()) ;
+//            double bin=(double) modelo.getValueAt(i,5 );
+//            Producto p=new Producto(id,name,cate,price,aisle,bin);
+//            System.out.println(p.toString());
+//            admi.getListaProductos().add(p);
+//            System.out.println(id);
+//            
+//            
+//        }
+//        //System.out.println(admi.getListaProductos());
+//        admi.escribirArchivo();
+//    
+
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        String acum = "";
+       // AdmiProducto admi=new AdmiProducto("./prueba.txt");
+        File archivo = null;
+        FileWriter fw = null;
+        BufferedWriter bw = null;
+        try {
+            String l = jT_c.getText();
+            String[] parse = l.split(" ");
+            archivo = new File("./" + parse[1]);
+            fw = new FileWriter(archivo, true);
+            bw = new BufferedWriter(fw);
+            for (int i = 0; i < modelo.getRowCount(); i++) {
+                for (int j = 0; j < modelo.getColumnCount(); j++) {
+                    if (modelo.getValueAt(i, j) != null) {
+                        modelo.getValueAt(i, j);
+                        acum += modelo.getValueAt(i, j) + ",";
+                    }
+                }
+                bw.write(acum);
+                acum = "";
+            }
+            bw.newLine();
+            bw.flush();
+        } catch (Exception e) {
+        }
+        bw.close();
+        fw.close();
+    }
+    
+    
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jB_Enter;
@@ -198,8 +328,8 @@ public class Supermecado extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jT_c;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
 }
