@@ -16,6 +16,8 @@ import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -57,6 +59,8 @@ public class Supermecado extends javax.swing.JFrame {
         jMenuItem5 = new javax.swing.JMenuItem();
         jMenuItem4 = new javax.swing.JMenuItem();
         jM_Help = new javax.swing.JMenu();
+        jMenuItem7 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -121,6 +125,11 @@ public class Supermecado extends javax.swing.JFrame {
         jM_File.setText("File");
 
         jMenuItem1.setText("New File");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jM_File.add(jMenuItem1);
 
         jMenuItem2.setText("Import File");
@@ -138,19 +147,51 @@ public class Supermecado extends javax.swing.JFrame {
         jMenu1.setText("Clear");
 
         jMenuItem3.setText("Clear Command Line");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem3);
 
         jMenuItem5.setText("Clear Table");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem5);
 
         jM_Window.add(jMenu1);
 
         jMenuItem4.setText("Refresh Tree");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
         jM_Window.add(jMenuItem4);
 
         jMenuBar1.add(jM_Window);
 
         jM_Help.setText("Help");
+
+        jMenuItem7.setText("Product Structure");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jM_Help.add(jMenuItem7);
+
+        jMenuItem6.setText("Commands");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jM_Help.add(jMenuItem6);
+
         jMenuBar1.add(jM_Help);
 
         setJMenuBar(jMenuBar1);
@@ -170,7 +211,11 @@ public class Supermecado extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here
+         if (jT_c.getText().equals("./data.txt")){
+            CargarTabla();
+            
+        }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jT_cActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jT_cActionPerformed
@@ -192,13 +237,69 @@ public class Supermecado extends javax.swing.JFrame {
             }
         
         }
-        if (jT_c.getText().equals("./clear"))
-            eliminar();
-           
-            
+        if (jT_c.getText().equals("./clear")){
+             eliminar();
         
+        } if (jT_c.getText().equals("./refresh")){
+            arboles();
+        }
+           
         
     }//GEN-LAST:event_jB_EnterMouseClicked
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+            // TODO add your handling code here:
+         if (jT_c.getText().equals("./create archivo.txt")){
+           try {
+               CreacionArchivos();
+          
+          } catch (IOException ex) {
+                Logger.getLogger(Supermecado.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        }
+        
+        
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        // TODO add your handling code here:
+        jT_c.setText(" ");
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+       // TODO add your handling code here:
+       if (jT_c.getText().equals("./clear")){
+             eliminar();
+        
+        }
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        // TODO add your handling code here:
+        if (jT_c.getText().equals("./refresh")){
+            arboles();
+        }
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this, "Id: es el numero identificador del objeto\n"
+                + "name: nombre del producto\n"
+                + "Category: es la categoria\n"
+                + "Price: Valor del producto\n"
+                + "Aisle:numero de pasillo donde se encuentra\n"
+                + "Bin: es la repiusa del producto\n");
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        // TODO add your handling code here:
+        JOptionPane.showMessageDialog(this,"lista de comandos:\n"
+                + "./data.txt\n"
+                + "./create archivo.txt\n"
+                + "./clear\n"
+                + "./refresh\n");
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -321,14 +422,30 @@ public class Supermecado extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         int tabla=modelo.getRowCount();
             for (int j = 0; j< tabla; j++) {
-                modelo.removeRow(0);
-                
+                modelo.removeRow(0);    
             }
-            
-            
-        
+      
         modelo.setRowCount(1);
         
+    
+    }
+    public void arboles (){
+        File archivo = new File(".");
+        File f[] = archivo.listFiles();
+        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Root"); 
+        DefaultTreeModel modeloARBOL = new DefaultTreeModel(root);
+        //modeloARBOL.setRoot(root);
+        for (File file : f) {
+            if (file.getName().contains(".txt")) {
+                DefaultMutableTreeNode nodo = new DefaultMutableTreeNode(file.getName());
+                root.add(nodo); 
+                System.out.println("entras");
+            }
+        }
+        jTree1.setModel(modeloARBOL);
+        modeloARBOL.reload(); 
+    
+    
     
     }
     
@@ -348,6 +465,8 @@ public class Supermecado extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
