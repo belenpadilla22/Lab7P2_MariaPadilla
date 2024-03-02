@@ -183,12 +183,20 @@ public class Supermecado extends javax.swing.JFrame {
         if (jT_c.getText().equals("./data.txt")){
             CargarTabla();
             
-        }if (jT_c.getText().equals("./create archivo.txt"))
+        }
+        if (jT_c.getText().equals("./create archivo.txt")){
             try {
                 CreacionArchivos();
-        } catch (IOException ex) {
-            
+            } catch (IOException ex) {
+                Logger.getLogger(Supermecado.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
         }
+        if (jT_c.getText().equals("./clear"))
+            eliminar();
+           
+            
+        
         
     }//GEN-LAST:event_jB_EnterMouseClicked
 
@@ -278,6 +286,7 @@ public class Supermecado extends javax.swing.JFrame {
 //        //System.out.println(admi.getListaProductos());
 //        admi.escribirArchivo();
 //    
+///te queda de evidencia :(
 
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         String acum = "";
@@ -307,6 +316,20 @@ public class Supermecado extends javax.swing.JFrame {
         }
         bw.close();
         fw.close();
+    }
+    public void eliminar (){
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        int tabla=modelo.getRowCount();
+            for (int j = 0; j< tabla; j++) {
+                modelo.removeRow(0);
+                
+            }
+            
+            
+        
+        modelo.setRowCount(1);
+        
+    
     }
     
     
